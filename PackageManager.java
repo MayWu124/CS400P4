@@ -1,8 +1,11 @@
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
@@ -143,8 +146,11 @@ public class PackageManager {
         return "";
     }
 
-    public static void main (String [] args) {
-        System.out.println("PackageManager.main()");
+    public static void main (String [] args) throws Exception{
+      Object obj = new JSONParser().parse(new FileReader("cyclic.json"));
+      JSONObject jo = (JSONObject) obj;
+      System.out.println(" size : "+ jo.size() + " jo.toString: " + jo.toString());
+        //System.out.println("PackageManager.main()");
     }
     
 }
