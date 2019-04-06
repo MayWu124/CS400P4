@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -44,7 +45,7 @@ public class PackageManager {
      * Package Manager default no-argument constructor.
      */
     public PackageManager() {
-        
+        graph = new Graph();
     }
     
     /**
@@ -149,6 +150,11 @@ public class PackageManager {
     public static void main (String [] args) throws Exception{
       Object obj = new JSONParser().parse(new FileReader("cyclic.json"));
       JSONObject jo = (JSONObject) obj;
+      JSONArray graphArray = (JSONArray) jo.get("packages");
+      for (int i= 0; i<graphArray.size(); i++) {
+        JSONObject packages = (JSONObject) graphArray.get(i);
+        System.out.println(packages);
+      }
       System.out.println(" size : "+ jo.size() + " jo.toString: " + jo.toString());
         //System.out.println("PackageManager.main()");
     }
